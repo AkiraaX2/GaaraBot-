@@ -5,56 +5,43 @@ import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
 //import { plugins } from '../lib/plugins.js'
 let tags = {
-  'ai': '𝐌𝐄𝐍𝐔 メ  𝐈𝐀',
-  'info': '𝐌𝐄𝐍𝐔 メ  𝐈𝐍𝐅𝐎',
-  'main': '𝐌𝐄𝐍𝐔 メ 𝐀𝐂𝐄𝐑𝐂𝐀 𝐃𝐄',
-  'bebot': '𝐌𝐄𝐍𝐔 メ 𝐒𝐔𝐁𝐒',
-  'game': '𝐌𝐄𝐍𝐔 メ 𝐆𝐀𝐌𝐄',
-  'convertir': '𝐌𝐄𝐍𝐔 メ 𝐂𝐎𝐍𝐕𝐄𝐑',
-  'econ': '𝐌𝐄𝐍𝐔 メ 𝐄𝐂𝐎𝐍𝐎𝐌𝐈𝐀',
-  'rpg': '𝐌𝐄𝐍𝐔 メ 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐎',
-  'pop': '𝐌𝐄𝐍𝐔 メ 𝐏𝐎𝐏𝐔𝐋𝐀𝐑',
-  'sticker': '𝐌𝐄𝐍𝐔 メ 𝐒𝐓𝐈𝐂𝐊𝐄𝐑𝐒',
-  'img': '𝐌𝐄𝐍𝐔 メ 𝐈𝐌𝐆',
-  'maker': '𝐌𝐄𝐍𝐔 メ 𝐌𝐀𝐊𝐄𝐑',
-  'prem': '𝐌𝐄𝐍𝐔 メ 𝐏𝐑𝐄𝐌',
-  'group': '𝐌𝐄𝐍𝐔 メ 𝐆𝐑𝐔𝐏𝐎𝐒',
-  //'nable': 'ON/OFF OPCIONES 🟢', 
-  //'nime': 'ANIME 🕊️',
-  'rnime': '𝐌𝐄𝐍𝐔 メ 𝐑𝐄𝐀𝐂𝐂',
-  'dl': '𝐌𝐄𝐍𝐔 メ 𝐃𝐄𝐒𝐂𝐀𝐑𝐆𝐀𝐒',
-  'tools': '𝐌𝐄𝐍𝐔 メ 𝐓𝐎𝐎𝐋𝐒',
-  'fun': '𝐌𝐄𝐍𝐔 メ 𝐅𝐔𝐍',
-  'cmd': '𝐌𝐄𝐍𝐔 メ 𝐃𝐀𝐓𝐀𝐁𝐀𝐒𝐄',
-  'nsfw': '𝐌𝐄𝐍𝐔 メ 𝐍𝐒𝐖𝐅',
-  'ansfw': '𝐌𝐄𝐍𝐔 メ 𝐍𝐒𝐖𝐅 𝐀𝐍𝐌', 
-  'owner': '𝐌𝐄𝐍𝐔 メ 𝐂𝐑𝐄𝐀𝐃𝐎𝐑', 
-  'advanced': '𝐌𝐄𝐍𝐔 メ 𝐀𝐕𝐀𝐍𝐂',
+  'main': 'ACERCA DE 🍯',
+  'bebot': 'SUB BOTS 🤖',
+  'game': 'JUEGOS 🎮',
+  'econ': 'NIVEL & ECONOMIA 🐍',
+  'rg': 'REGISTRO 📈',
+  'gc': 'POPULAR 🅿️',
+  'sticker': 'STICKER 🍁',
+  'img': 'IMAGEN 🌱',
+  'maker': 'MAKER ✍️',
+  'prem': 'PREMIUM 🎫',
+  'group': 'GRUPO 👥',
+  'nable': 'ON/OFF OPCIONES 🟢', 
+  'nime': 'ANIME 🌸',
+  'rnime': 'ANIME REACCION 🌸',
+  'dl': 'DESCARGAS 📥',
+  'tools': 'TOOLS 🧸',
+  'fun': 'FUN 🔮',
+  'cmd': 'DATABASE 💻',
+  'nsfw': 'NSFW 🔞',
+  'ansfw': 'NSFW ANIME 🔞', 
+  'owner': 'OWNER 🫅', 
+  'advanced': 'AVANZADO 🔥',
 }
 const defaultMenu = {
   before: `
-🌸 𝐘𝐔𝐌𝐈𝐊𝐎 メ 𝐁𝐎𝐓  🌸
 
-╔════════⫹✰⫺════════╗
-║\t\t\t\t𝐈𝐍𝐅𝐎 メ 𝐁𝐎𝐓
-╠═══
-╠ ☆ 🦅 𝐌𝐎𝐃𝐎 : Público
-╠ ☆ 📖 𝐁𝐀𝐈𝐋𝐄𝐘𝐒 : Multi Device
-╠ ☆ ⏳ 𝐓𝐈𝐄𝐌𝐏𝐎 𝐎𝐍 : %muptime
-╠ ☆ 👥 𝐔𝐒𝐄𝐑𝐒 : 133990
-╚═══════════════════╝
-%readmore
-╔════════⫹✰⫺════════╗
-║\t\t\t 𝐈𝐍𝐅𝐎 メ 𝐔𝐒𝐄𝐑𝐒
-╠═══
-╠ ☆ ☁️ 𝐍𝐎𝐌𝐁𝐑𝐄 : %name
-╠ ☆ 📊 𝐍𝐈𝐕𝐄𝐋 : %level
-╠ ☆ 🖇️ 𝐗𝐏 : %totalexp
-╚═══════════════════╝
+🌵 𝗚𝗔𝗔𝗥𝗔 𝗕𝗢𝗧 🌵
+╰˚₊·—̳͟͞͞🍯𝗛𝗼𝗹𝗮 %name
+    ╰┈➤ ⌛𝙏𝙞𝙚𝙢𝙥𝙤 𝘼𝙘𝙩: %muptime %sbot
+    ╰┈➤ 📆 𝙁𝙚𝙘𝙝𝙖: %date
+    ╰┈➤ 👤𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨: %rtotalreg
+    ╰┈➤ 👩🏻‍💻𝘾𝙧𝙚𝙖𝙙𝙤𝙧/𝙖: 
+    ╰┈➤ wa.me/+56945843173
 `.trimStart(),
-  header: '╔════════⫹✰⫺════════╗\n║\t\t\t%category\n╠════════⫹✰⫺════════╝\n✧⃝━━━━━━━━⫹✧⫺━━━━━━━✰\n┃╭━─━─━──≪ ✧ ≫─━──━─━╮',
-  body: '┃ ✰ %cmd %isdiamond %isPremium',
-  footer: '┃╰━─━──━─≪ ✧ ≫─━──━─━╯\n✧⃝━━━━━━━━⧔✰⧕━━━━━━━✰\n',
+  header: '╭───────────────────\n│≼·˚ *%category*\n│≼·˚ ╭────────────',
+  body: '│≼·˚ ╭┈┈• _*%cmd*_ %isdiamond %isPremium',
+  footer: '│≼·˚ ╰────────────\n╰────────────\n',
   after: `
 `,
 }
